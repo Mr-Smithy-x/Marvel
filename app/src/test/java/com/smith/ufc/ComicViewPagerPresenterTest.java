@@ -17,14 +17,17 @@ import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 /**
  * Created by Charlton on 10/31/17.
  */
 
-public class ComicRepositoryTest {
+public class ComicViewPagerPresenterTest {
 
+
+    private static final String TITLE = "title";
+    
+    private static final String NO_COMIC = "No Comics";
 
     @Mock
     private CharacterViewPagerPresenter.CharacterGenericView view;
@@ -37,9 +40,6 @@ public class ComicRepositoryTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    static String TITLE = "title";
-    static String COMIC = "title";
-    static String IMAGE = "image";
 
 
     @Test
@@ -51,16 +51,15 @@ public class ComicRepositoryTest {
         String s = thumbnail.toString();
         marvelCharacter.setThumbnail(thumbnail);
         adapter.setData(Arrays.asList(marvelCharacter));
-        adapter.onBindRepositoryRowViewAtPosition(0,view);
+        adapter.onBindRepositoryRowViewAtPosition(0, view);
 
 
         InOrder inOrder = Mockito.inOrder(view);
         inOrder.verify(view, times(1)).setTitle(TITLE);
-        inOrder.verify(view, times(1)).setDescription("No Comics");
+        inOrder.verify(view, times(1)).setDescription(NO_COMIC);
         inOrder.verify(view, times(1)).setImage(s);
 
     }
-
 
 
     @Test
@@ -68,9 +67,7 @@ public class ComicRepositoryTest {
         adapter = new CharacterViewPagerPresenter();
         MarvelResponse<MarvelData<MarvelComicList>> marvelDataMarvelResponse = new MarvelResponse<>(200);
         marvelDataMarvelResponse.data = new MarvelData<>(new MarvelComicList());
-        adapter.onBindRepositoryRowViewAtPosition(0,view);
-
-
+        adapter.onBindRepositoryRowViewAtPosition(0, view);
 
 
         InOrder inOrder = Mockito.inOrder(view);
@@ -81,17 +78,13 @@ public class ComicRepositoryTest {
     }
 
 
-
     @Test
     public void failIfDataNull() {
         adapter = new CharacterViewPagerPresenter();
         MarvelResponse<MarvelData<MarvelComicList>> marvelDataMarvelResponse = new MarvelResponse<>(200);
         marvelDataMarvelResponse.data = new MarvelData<>(new MarvelComicList());
         adapter.setData(Arrays.asList(new MarvelCharacter()));
-        adapter.onBindRepositoryRowViewAtPosition(0,view);
-
-
-
+        adapter.onBindRepositoryRowViewAtPosition(0, view);
 
 
         InOrder inOrder = Mockito.inOrder(view);

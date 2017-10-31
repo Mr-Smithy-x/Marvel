@@ -49,7 +49,6 @@ class MarvelCharacterInteractor : CharacterContract.Interactor {
     override fun searchCharacterByName(name: String?, marvelDataSource: MarvelCharacterDataSource, callback: BaseContract.BaseInteractor.MarvelCallback<MarvelCharacterList>): Disposable {
         callback.onStarted()
         if (!name.isNullOrEmpty()) {
-            Timber.e("CALLED getCharacters");
             return marvelDataSource.getCharacters(name!!)
                     .subscribe(
                             { res ->
@@ -63,7 +62,6 @@ class MarvelCharacterInteractor : CharacterContract.Interactor {
                             { callback.onCompleted() }
                     )
         } else {
-            Timber.e("CALLED characters");
             return marvelDataSource.characters
                     .subscribe(
                             { res ->
