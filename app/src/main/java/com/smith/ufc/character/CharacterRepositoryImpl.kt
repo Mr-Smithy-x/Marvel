@@ -1,7 +1,6 @@
 package com.smith.ufc.character
 
 import android.support.annotation.NonNull
-import com.smith.ufc.data.base.Repository
 import com.smith.ufc.data.models.MarvelCharacter
 import com.smith.ufc.data.models.MarvelComic
 import com.smith.ufc.data.models.MarvelData
@@ -10,7 +9,6 @@ import com.smith.ufc.data.models.verbose.MarvelCharacterList
 import com.smith.ufc.data.service.MarvelCharacterDataSource
 import io.reactivex.Observable
 import io.realm.*
-import java.util.*
 
 /**
  * Created by Charlton on 10/31/17.
@@ -22,34 +20,26 @@ class CharacterRepositoryImpl(private val realmConfiguration: RealmConfiguration
     override fun add(item: MarvelCharacter) {
         val realm = Realm.getInstance(realmConfiguration)
         realm.executeTransaction { realm1 -> realm1.copyToRealmOrUpdate(item) }
-        realm.close()
     }
 
     override fun add(items: List<MarvelCharacter>) {
         val realm = Realm.getInstance(realmConfiguration)
         realm.executeTransaction { realm1 -> realm1.copyToRealmOrUpdate(items) }
-        realm.close()
     }
 
     override fun update(item: MarvelCharacter) {
         val realm = Realm.getInstance(realmConfiguration)
         realm.executeTransaction { realm1 -> realm1.copyToRealmOrUpdate(item) }
-        realm.close()
     }
 
     override fun remove(item: MarvelCharacter) {
         val realm = Realm.getInstance(realmConfiguration)
         realm.executeTransaction { realm1 -> item.deleteFromRealm() }
-        realm.close()
     }
 
     override fun query(specification: CharacterSpecification): List<MarvelCharacter> {
         val realm = Realm.getInstance(realmConfiguration)
-        val realmResults = specification.toRealmResults(realm)
-        val newses = ArrayList<MarvelCharacter>()
-        newses.addAll(realmResults)
-        realm.close()
-        return newses
+        return specification.toRealmResults(realm)
     }
 
 

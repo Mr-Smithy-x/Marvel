@@ -10,7 +10,6 @@ import com.smith.ufc.data.service.MarvelComicDataSource
 import io.reactivex.Observable
 import io.realm.*
 import java8.util.stream.StreamSupport
-import java.util.*
 
 /**
  * Created by Charlton on 10/31/17.
@@ -22,34 +21,26 @@ class ComicRepositoryImpl(private val realmConfiguration: RealmConfiguration, pr
     override fun add(item: MarvelComic) {
         val realm = Realm.getInstance(realmConfiguration)
         realm.executeTransaction { realm1 -> realm1.copyToRealmOrUpdate(item) }
-        realm.close()
     }
 
     override fun add(items: List<MarvelComic>) {
         val realm = Realm.getInstance(realmConfiguration)
         realm.executeTransaction { realm1 -> realm1.copyToRealmOrUpdate(items) }
-        realm.close()
     }
 
     override fun update(item: MarvelComic) {
         val realm = Realm.getInstance(realmConfiguration)
         realm.executeTransaction { realm1 -> realm1.copyToRealmOrUpdate(item) }
-        realm.close()
     }
 
     override fun remove(item: MarvelComic) {
         val realm = Realm.getInstance(realmConfiguration)
         realm.executeTransaction { item.deleteFromRealm() }
-        realm.close()
     }
 
     override fun query(specification: ComicSpecification): List<MarvelComic> {
         val realm = Realm.getInstance(realmConfiguration)
-        val realmResults = specification.toRealmResults(realm)
-        val newses = ArrayList<MarvelComic>()
-        newses.addAll(realmResults)
-        realm.close()
-        return newses
+        return specification.toRealmResults(realm)
     }
 
 
