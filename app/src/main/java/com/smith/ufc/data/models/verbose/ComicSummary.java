@@ -1,7 +1,5 @@
 package com.smith.ufc.data.models.verbose;
 
-import android.util.Log;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.smith.ufc.data.models.MarvelComic;
@@ -33,7 +31,6 @@ public class ComicSummary extends RealmObject {
     }
 
     public MarvelComic getComic(){
-        Log.e(MarvelComic.class.getSimpleName(), String.format("ID: %s, Name %s", getResourceId(), getName()));
         return Realm.getDefaultInstance().where(MarvelComic.class).equalTo("id", getResourceId()).findFirst();
     }
 

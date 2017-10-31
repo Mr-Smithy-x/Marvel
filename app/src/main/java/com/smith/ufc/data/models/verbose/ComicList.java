@@ -1,7 +1,5 @@
 package com.smith.ufc.data.models.verbose;
 
-import android.util.Log;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.smith.ufc.data.models.MarvelComic;
@@ -33,19 +31,15 @@ public class ComicList extends RealmObject {
     private Integer returned;
 
     public List<MarvelComic> getComics() {
-        List<MarvelComic> collect = StreamSupport.stream(items).map(ComicSummary::getComic).filter(Objects::nonNull).collect(Collectors.toList());
-        Log.e("COLLECT", String.valueOf(collect.size()));
-        return collect;
+        return StreamSupport.stream(items).map(ComicSummary::getComic).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     public List<ComicSummary> getComicSummary() {
-        List<ComicSummary> collect = StreamSupport.stream(items).filter(Objects::nonNull).collect(Collectors.toList());
-        return collect;
+        return StreamSupport.stream(items).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     public List<ComicSummary> getNulledSummary() {
-        List<ComicSummary> collect = StreamSupport.stream(items).filter(r -> r.getComic() == null).collect(Collectors.toList());
-        return collect;
+        return StreamSupport.stream(items).filter(r -> r.getComic() == null).collect(Collectors.toList());
     }
 
     public Integer getAvailable() {

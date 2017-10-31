@@ -1,10 +1,7 @@
 package com.smith.ufc.data.models.verbose;
 
-import android.util.Log;
-
 import com.google.gson.annotations.SerializedName;
 import com.smith.ufc.data.models.MarvelCharacter;
-import com.smith.ufc.data.models.MarvelComic;
 
 import io.realm.Realm;
 import io.realm.RealmObject;

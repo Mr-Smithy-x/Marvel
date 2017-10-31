@@ -6,12 +6,10 @@ import android.support.annotation.IdRes
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
-import android.support.v4.view.ViewCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.AppCompatEditText
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
@@ -128,7 +126,7 @@ class MainActivity : BaseActivity(), ComicContract.View {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
-        StreamSupport.stream(savedInstanceState?.keySet()).forEach { r -> Log.e("KEY", r.toString()) }
+        StreamSupport.stream(savedInstanceState?.keySet()).forEach { r -> Timber.e("Available Keys: onRestoreInstance: %s", r.toString()) }
         mCharacterAdapter?.setData(StreamSupport.stream(savedInstanceState?.getIntArray(KEY_CHARACTERS)?.asList()).map { r -> Realm.getDefaultInstance().where(MarvelCharacter::class.java).equalTo("id", r).findFirst() }.filter(Objects::nonNull).collect(Collectors.toList()) as ArrayList<MarvelCharacter?>)
         mComicAdapter?.setData(StreamSupport.stream(savedInstanceState?.getIntArray(KEY_COMICS)?.asList()).map { r -> Realm.getDefaultInstance().where(MarvelComic::class.java).equalTo("id", r).findFirst() }.filter(Objects::nonNull).collect(Collectors.toList()))
         try {

@@ -1,7 +1,6 @@
 package com.smith.ufc.data.service
 
 import android.os.Environment
-import android.util.Log
 import com.smith.ufc.BuildConfig
 import com.smith.ufc.data.models.MarvelData
 import com.smith.ufc.data.models.MarvelResponse
@@ -16,6 +15,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import java.util.*
 
 /**
@@ -33,7 +33,7 @@ class MarvelNetworkSource(val background: Scheduler, val main: Scheduler) : Marv
     init {
         val cacheSize = 20 * 1024 * 1024 // 20 MB
         val cache = Cache(Environment.getDownloadCacheDirectory(), cacheSize.toLong())
-        val interceptor = HttpLoggingInterceptor { message -> Log.e(HttpLoggingInterceptor::class.java.simpleName, message) }
+        val interceptor = HttpLoggingInterceptor { message -> Timber.e("%s: %s",HttpLoggingInterceptor::class.java.simpleName, message) }
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder()
                 .cache(cache)
