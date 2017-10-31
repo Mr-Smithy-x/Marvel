@@ -62,38 +62,18 @@ class CharacterRepositoryImpl(private val realmConfiguration: RealmConfiguration
     }
 
     override fun getComicCharacters(id: Int): Observable<MarvelResponse<MarvelData<MarvelCharacterList>>> =
-            mCharacterDataSource.getComicCharacters(id).map({ response ->
-                run {
-                    add(response.data.results)
-                }
-                return@map offlineComicCharacters(id)
-            }).onErrorReturn { offlineComicCharacters(id) }
+            mCharacterDataSource.getComicCharacters(id).onErrorReturn { offlineComicCharacters(id) }.doOnNext({next -> add(next.data.results) })
 
 
     override fun getCharacter(id: Int): Observable<MarvelResponse<MarvelData<MarvelCharacterList>>> =
-            mCharacterDataSource.getCharacter(id).map({ response ->
-                run {
-                    add(response.data.results)
-                }
-                return@map offlineCharacter(id)
-            }).onErrorReturn { offlineCharacter(id) }
+            mCharacterDataSource.getCharacter(id).onErrorReturn { offlineCharacter(id) }.doOnNext({next -> add(next.data.results) })
 
     override val characters: Observable<MarvelResponse<MarvelData<MarvelCharacterList>>>
-        get() = mCharacterDataSource.characters.map({ response ->
-            run {
-                add(response.data.results)
-            }
-            return@map offlineCharacters(null)
-        }).onErrorReturn { offlineCharacters(null) }
+        get() = mCharacterDataSource.characters.onErrorReturn { offlineCharacters(null) }.doOnNext({next -> add(next.data.results) })
 
 
     override fun getCharacters(name: String): Observable<MarvelResponse<MarvelData<MarvelCharacterList>>> =
-            mCharacterDataSource.characters.map({ response ->
-                run {
-                    add(response.data.results)
-                }
-                return@map offlineCharacters(name)
-            }).onErrorReturn { offlineCharacters(name) }
+            mCharacterDataSource.getCharacters(name).onErrorReturn { offlineCharacters(name) }.doOnNext({next -> add(next.data.results) })
 
 
     private fun offlineCharacter(id: Int?): MarvelResponse<MarvelData<MarvelCharacterList>> {

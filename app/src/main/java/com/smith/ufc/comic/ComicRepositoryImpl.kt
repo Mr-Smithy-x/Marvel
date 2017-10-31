@@ -76,28 +76,13 @@ class ComicRepositoryImpl(private val realmConfiguration: RealmConfiguration, pr
     }
 
     override fun getComics(name: String): Observable<MarvelResponse<MarvelData<MarvelComicList>>> =
-            mComicDataSource.getComics(name).map({ response ->
-                run {
-                    add(response.data.results)
-                }
-                return@map offlineComics(name)
-            }).onErrorReturn { offlineComics(name) }
+            mComicDataSource.getComics(name).onErrorReturn { offlineComics(name) }.doOnNext({next -> add(next.data.results) })
 
     override fun getComic(id: Int): Observable<MarvelResponse<MarvelData<MarvelComicList>>> =
-            mComicDataSource.getComic(id).map({ response ->
-                run {
-                    add(response.data.results)
-                }
-                return@map offlineComic(id)
-            }).onErrorReturn { offlineComic(id) }
+            mComicDataSource.getComic(id).onErrorReturn { offlineComic(id) }.doOnNext({next -> add(next.data.results) })
 
     override val comics: Observable<MarvelResponse<MarvelData<MarvelComicList>>>
-        get() = mComicDataSource.comics.map({ response ->
-            run {
-                add(response.data.results)
-            }
-            return@map offlineComics(null)
-        }).onErrorReturn { offlineComics(null) }
+        get() = mComicDataSource.comics.onErrorReturn { offlineComics(null) }.doOnNext({next -> add(next.data.results) })
 
     private fun offlineComic(id: Int?): MarvelResponse<MarvelData<MarvelComicList>> {
         val data = MarvelResponse<MarvelData<MarvelComicList>>(200)

@@ -5,6 +5,7 @@ import com.smith.ufc.data.models.verbose.MarvelCharacterList
 import com.smith.ufc.data.service.MarvelCharacterDataSource
 import com.smith.ufc.data.service.MarvelDataSource
 import io.reactivex.disposables.Disposable
+import timber.log.Timber
 
 /**
  * Created by Charlton on 10/27/17.
@@ -46,8 +47,9 @@ class MarvelCharacterInteractor : CharacterContract.Interactor {
 
     override fun searchCharacterByName(name: String?, marvelDataSource: MarvelCharacterDataSource, callback: BaseContract.BaseInteractor.MarvelCallback<MarvelCharacterList>): Disposable {
         callback.onStarted()
-        if (name != null) {
-            return marvelDataSource.getCharacters(name)
+        if (!name.isNullOrEmpty()) {
+            Timber.e("CALLED getCharacters");
+            return marvelDataSource.getCharacters(name!!)
                     .subscribe(
                             { res ->
                                 run {
@@ -60,6 +62,7 @@ class MarvelCharacterInteractor : CharacterContract.Interactor {
                             { callback.onCompleted() }
                     )
         } else {
+            Timber.e("CALLED characters");
             return marvelDataSource.characters
                     .subscribe(
                             { res ->
