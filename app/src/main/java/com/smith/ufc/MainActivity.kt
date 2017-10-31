@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.TextView
@@ -28,6 +29,8 @@ import com.smith.ufc.data.models.MarvelCharacter
 import com.smith.ufc.data.models.MarvelComic
 import com.smith.ufc.data.models.verbose.MarvelCharacterList
 import com.smith.ufc.data.models.verbose.MarvelComicList
+import com.smith.ufc.data.repositories.character.CharacterSpecification
+import com.smith.ufc.data.repositories.comic.ComicSpecification
 import com.smith.ufc.helpers.DrawableTextWatcher
 import com.smith.ufc.helpers.RightDrawableClickListener
 import com.smith.ufc.ui.adapters.CharacterAdapter
@@ -54,7 +57,8 @@ import java.util.*
  * @see com.smith.ufc.comic.presenters.ComicRecyclerPresenter
  * @see com.smith.ufc.comic.ComicContract
  */
-class MainActivity : BaseActivity(), ComicContract.View {
+class MainActivity : BaseActivity(), ComicContract.View, View.OnClickListener {
+
 
     //region Presenters
     private val mMarvelComicPresenter: ComicContract.Presenter = MarvelComicPresenter(this)
@@ -90,13 +94,7 @@ class MainActivity : BaseActivity(), ComicContract.View {
         setSupportActionBar(findViewById(R.id.toolbar))
         findViewById<DrawerLayout>(R.id.drawer_layout).addDrawerListener(ActionBarDrawerToggle(this, findViewById(R.id.drawer_layout), findViewById(R.id.toolbar), R.string.open_drawer, R.string.close_drawer))
         findViewById<AppCompatEditText>(R.id.search_bar).addTextChangedListener(DrawableTextWatcher(findViewById(R.id.search_bar)))
-        findViewById<AppCompatEditText>(R.id.search_bar).setOnTouchListener(object : RightDrawableClickListener(findViewById<AppCompatEditText>(R.id.search_bar)) {
-            override fun onClick(editText: EditText) {
-                editText.setText("")
-                mMarvelCharacterPresenter.getLatest()
-                mMarvelComicPresenter.getLatest()
-            }
-        })
+        findViewById<AppCompatEditText>(R.id.search_bar).setOnTouchListener(RightDrawableClickListener(findViewById<AppCompatEditText>(R.id.search_bar), this))
         findViewById<AppBarLayout>(R.id.app_bar).addOnOffsetChangedListener { appBarLayout, verticalOffset -> findViewById<ArrowViewPager>(R.id.arrow_view_pager).alpha = 1.0f - Math.abs(verticalOffset / appBarLayout.totalScrollRange.toFloat()) }
         findViewById<AppCompatEditText>(R.id.search_bar).setOnEditorActionListener { view, actionId, event ->
             Timber.d("onEditorAction")
@@ -172,6 +170,16 @@ class MainActivity : BaseActivity(), ComicContract.View {
     override fun onResume() {
         super.onResume()
         animatedGridLayoutManager?.animateSpruce()
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.search_bar -> {
+                (v as EditText).setText("")
+                mComicAdapter?.setData(comicDb.query(ComicSpecification()))
+                mCharacterAdapter?.setData(characterDb.query(CharacterSpecification()))
+            }
+        }
     }
 
     //region Fetching Callbacks

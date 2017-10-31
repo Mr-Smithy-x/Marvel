@@ -9,10 +9,8 @@ import android.widget.EditText
  *
  * When right drawable is clicked/touched, the following action will occur
  */
-abstract class RightDrawableClickListener(private val editText: EditText) : View.OnTouchListener {
+class RightDrawableClickListener(private val editText: EditText, private val onClickListener: View.OnClickListener?) : View.OnTouchListener {
 
-
-    abstract fun onClick(editText: EditText)
 
 
 
@@ -20,7 +18,7 @@ abstract class RightDrawableClickListener(private val editText: EditText) : View
         if (event.action == MotionEvent.ACTION_UP) {
             if (editText.compoundDrawables[2] != null) {
                 if (event.x >= editText.right - editText.left - editText.compoundDrawables[2].bounds.width()) {
-                    onClick(editText)
+                    onClickListener?.onClick(editText)
                     return true
                 }
             }

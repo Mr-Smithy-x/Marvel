@@ -1,7 +1,7 @@
 package com.smith.ufc.data.repositories.comic
 
-import com.smith.ufc.data.repositories.RealmSpecification
 import com.smith.ufc.data.models.MarvelComic
+import com.smith.ufc.data.repositories.RealmSpecification
 import io.realm.Case
 import io.realm.Realm
 import io.realm.RealmResults
@@ -14,6 +14,9 @@ class ComicSpecification : RealmSpecification<MarvelComic> {
 
     private var name: String? = null
     private var id = -1
+
+
+    constructor()
 
     constructor(id: Int) {
         this.id = id

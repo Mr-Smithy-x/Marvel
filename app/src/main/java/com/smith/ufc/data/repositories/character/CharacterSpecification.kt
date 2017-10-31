@@ -16,6 +16,8 @@ class CharacterSpecification : RealmSpecification<MarvelCharacter> {
     private var name: String? = null
     private var id = -1
 
+    constructor()
+
     constructor(id: Int) {
         this.id = id
     }
