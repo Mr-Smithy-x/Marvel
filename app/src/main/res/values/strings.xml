@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Marvel</string>
+    <string name="search">Search</string>
+    <string name="marvel">Marvel</string>
+    <string name="question">Help</string>
+    <string name="grid_layout_manager">android.support.v7.widget.GridLayoutManager</string>
+    <string name="open_drawer">Open Navigation</string>
+    <string name="close_drawer">Close Navigation</string>
+    <string name="read_more">Read More</string>
+    <string name="search_title">Search Comic</string>
+    <string name="dummytext">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="sample">SAMPLE</string>
+    <string name="sample_action">SAMPLE ACTION</string>
+</resources>

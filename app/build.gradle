@@ -1,0 +1,124 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'realm-android'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "com.smith.ufc"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+        buildConfigField "String", "PRIV_KEY", "\"44c5ec76510e3056b157410ea94f6eb0c8d85745\""
+        buildConfigField "String", "PUB_KEY", "\"007bfcf3d005159743adcee2e45dbebc\""
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+
+def streamsupport = "1.5.6"
+def support = "26.1.0"
+
+def daggerVersion = "2.11"
+def retrofit = "2.3.0"
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:support-v4:26.1.0'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+
+
+
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:1.10.19'
+
+    //region StreamSupport
+    implementation "net.sourceforge.streamsupport:streamsupport:$streamsupport"
+    implementation "net.sourceforge.streamsupport:streamsupport-cfuture:$streamsupport"
+    implementation "net.sourceforge.streamsupport:streamsupport-atomic:$streamsupport"
+    implementation "net.sourceforge.streamsupport:streamsupport-flow:$streamsupport"
+    implementation "net.sourceforge.streamsupport:streamsupport-literal:$streamsupport"
+    //endregion
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation "de.hdodenhof:circleimageview:2.1.0"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+
+    //region Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:retrofit-converters:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofit"
+    //endregion
+
+
+    // Espresso UI Testing
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.1"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:3.0.1"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:3.0.1"
+    androidTestImplementation "com.android.support.test.espresso.idling:idling-concurrent:3.0.1"
+
+    // Resolve conflicts between main and test APK:
+    androidTestImplementation "com.android.support:support-annotations:26.1.0"
+    androidTestImplementation "com.android.support:support-v4:26.1.0"
+    androidTestImplementation "com.android.support:recyclerview-v7:26.1.0"
+    androidTestImplementation "com.android.support:appcompat-v7:26.1.0"
+    androidTestImplementation "com.android.support:design:26.1.0"
+
+    implementation 'com.jakewharton.timber:timber:4.4.0'
+    implementation 'joda-time:joda-time:2.9.9'
+    compile 'com.github.bumptech.glide:glide:4.2.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
+
+    kapt 'com.android.databinding:compiler:3.0.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    compile 'io.realm:android-adapters:2.1.0'
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    compile 'com.willowtreeapps.spruce:spruce-android:1.0.1'
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+
+}
+repositories {
+    maven {
+        url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2'
+    }
+}

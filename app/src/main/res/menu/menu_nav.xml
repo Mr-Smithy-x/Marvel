@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="@string/sample"
+        android:id="@+id/action_char"
+        app:actionLayout="@layout/menu_counter" />
+    <item
+        android:title="@string/sample"
+        app:actionLayout="@layout/menu_counter" />
+    <item
+        android:title="@string/sample"
+        app:actionLayout="@layout/menu_counter" />
+    <item
+        android:title="@string/sample"
+        app:actionLayout="@layout/menu_counter" />
+    <item
+        android:title="@string/sample"
+        app:actionLayout="@layout/menu_counter" />
+    <item
+        android:title="@string/sample"
+        app:actionLayout="@layout/menu_counter" />
+</menu>

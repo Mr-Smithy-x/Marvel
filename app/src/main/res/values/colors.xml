@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="dark_grey">#333333</color>
+    <color name="darker_grey">#222222</color>
+
+
+    <color name="colorPurple">#3F51B5</color>
+    <color name="colorPurpleDark">#303F9F</color>
+    <color name="colorPinkAccent">#FF4081</color>
+
+
+    <color name="colorPrimary">@color/dark_grey</color>
+    <color name="colorPrimaryDark">@color/darker_grey</color>
+    <color name="colorAccent">#FF4081</color>
+</resources>

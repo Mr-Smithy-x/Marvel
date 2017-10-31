@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/dark_grey"/>
+            <padding android:bottom="@dimen/half_standard_padding"
+                android:right="@dimen/half_standard_padding"
+                android:left="@dimen/half_standard_padding"
+                android:top="@dimen/half_standard_padding"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="@color/darker_grey"/>
+            <padding android:bottom="@dimen/half_standard_padding"
+                android:right="@dimen/half_standard_padding"
+                android:left="@dimen/half_standard_padding"
+                android:top="@dimen/half_standard_padding"/>
+        </shape>
+    </item>
+
+</selector>
