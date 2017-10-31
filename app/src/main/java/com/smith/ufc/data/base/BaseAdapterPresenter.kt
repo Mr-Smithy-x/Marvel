@@ -6,7 +6,7 @@ import java.util.*
  * Created by Charlton on 10/27/17.
  */
 
-abstract class BaseAdapter<in V : BaseAdapter.BaseView, I> {
+abstract class BaseAdapterPresenter<in V : BaseAdapterPresenter.BaseView, I> {
 
 
     private var repository: MutableList<I>? = ArrayList()

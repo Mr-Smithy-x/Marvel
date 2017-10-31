@@ -1,13 +1,13 @@
 package com.smith.ufc.data.di
 
 import com.smith.ufc.character.CharacterContract
-import com.smith.ufc.character.CharacterRepository
-import com.smith.ufc.character.CharacterRepositoryImpl
-import com.smith.ufc.comic.MarvelComicInteractor
-import com.smith.ufc.character.MarvelCharacterInteractor
+import com.smith.ufc.data.repositories.character.CharacterRepository
+import com.smith.ufc.data.repositories.character.CharacterRepositoryImpl
+import com.smith.ufc.comic.presenters.MarvelComicInteractor
+import com.smith.ufc.character.presenters.MarvelCharacterInteractor
 import com.smith.ufc.comic.ComicContract
-import com.smith.ufc.comic.ComicRepository
-import com.smith.ufc.comic.ComicRepositoryImpl
+import com.smith.ufc.data.repositories.comic.ComicRepository
+import com.smith.ufc.data.repositories.comic.ComicRepositoryImpl
 import com.smith.ufc.data.service.MarvelDataSource
 import com.smith.ufc.data.service.MarvelNetworkSource
 
@@ -19,7 +19,6 @@ import dagger.Provides
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import io.realm.Realm
 import io.realm.RealmConfiguration
 
 /**

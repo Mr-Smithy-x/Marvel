@@ -18,11 +18,11 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.smith.ufc.character.CharacterContract
-import com.smith.ufc.character.CharacterGenericAdapter
-import com.smith.ufc.character.MarvelCharacterPresenter
+import com.smith.ufc.character.presenters.CharacterViewPagerPresenter
+import com.smith.ufc.character.presenters.MarvelCharacterPresenter
 import com.smith.ufc.comic.ComicContract
-import com.smith.ufc.comic.ComicViewHolderAdapter
-import com.smith.ufc.comic.MarvelComicPresenter
+import com.smith.ufc.comic.presenters.ComicRecyclerPresenter
+import com.smith.ufc.comic.presenters.MarvelComicPresenter
 import com.smith.ufc.data.base.BaseActivity
 import com.smith.ufc.data.models.MarvelCharacter
 import com.smith.ufc.data.models.MarvelComic
@@ -43,6 +43,17 @@ import timber.log.Timber
 import java.util.*
 
 
+/**
+ *
+ * @see com.smith.ufc.character.presenters.MarvelCharacterPresenter
+ * @see com.smith.ufc.ui.adapters.CharacterRecyclerAdapter
+ * @see com.smith.ufc.character.presenters.CharacterViewPagerPresenter
+ * @see com.smith.ufc.character.CharacterContract
+ * @see com.smith.ufc.comic.presenters.MarvelComicPresenter
+ * @see com.smith.ufc.ui.adapters.ComicRecyclerAdapter
+ * @see com.smith.ufc.comic.presenters.ComicRecyclerPresenter
+ * @see com.smith.ufc.comic.ComicContract
+ */
 class MainActivity : BaseActivity(), ComicContract.View {
 
     //region Presenters
@@ -68,8 +79,8 @@ class MainActivity : BaseActivity(), ComicContract.View {
     })
     //endregion
 
-    private var mComicAdapter: ComicRecyclerAdapter? = ComicRecyclerAdapter(ComicViewHolderAdapter())
-    private var mCharacterAdapter: CharacterAdapter? = CharacterAdapter(CharacterGenericAdapter())
+    private var mComicAdapter: ComicRecyclerAdapter? = ComicRecyclerAdapter(ComicRecyclerPresenter())
+    private var mCharacterAdapter: CharacterAdapter? = CharacterAdapter(CharacterViewPagerPresenter())
     private var animatedGridLayoutManager: AnimatedGridLayoutManager? = null
 
     @SuppressLint("ClickableViewAccessibility")

@@ -1,9 +1,8 @@
 package com.smith.ufc.data.di
 
 import com.smith.ufc.MarvelApplication
-import com.smith.ufc.character.CharacterGenericAdapter
-import com.smith.ufc.character.MarvelCharacterPresenter
-import com.smith.ufc.comic.MarvelComicPresenter
+import com.smith.ufc.character.presenters.MarvelCharacterPresenter
+import com.smith.ufc.comic.presenters.MarvelComicPresenter
 import com.smith.ufc.data.base.BaseActivity
 import com.smith.ufc.data.base.BaseFragment
 import com.smith.ufc.data.base.BaseViewModel

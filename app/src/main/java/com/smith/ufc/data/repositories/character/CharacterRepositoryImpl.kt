@@ -1,4 +1,4 @@
-package com.smith.ufc.character
+package com.smith.ufc.data.repositories.character
 
 import android.support.annotation.NonNull
 import com.smith.ufc.data.models.MarvelCharacter

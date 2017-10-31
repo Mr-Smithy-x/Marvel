@@ -1,13 +1,11 @@
 package com.smith.ufc;
 
 import com.smith.ufc.character.CharacterContract;
-import com.smith.ufc.character.CharacterRepository;
-import com.smith.ufc.character.MarvelCharacterPresenter;
-import com.smith.ufc.data.base.BaseContract;
+import com.smith.ufc.data.repositories.character.CharacterRepository;
+import com.smith.ufc.character.presenters.MarvelCharacterPresenter;
 import com.smith.ufc.data.models.verbose.MarvelCharacterList;
 import com.smith.ufc.data.models.MarvelData;
 import com.smith.ufc.data.models.MarvelResponse;
-import com.smith.ufc.data.service.MarvelDataSource;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +15,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;

@@ -1,4 +1,4 @@
-package com.smith.ufc.character
+package com.smith.ufc.data.repositories.character
 
 import com.smith.ufc.data.base.RealmSpecification
 import com.smith.ufc.data.models.MarvelCharacter

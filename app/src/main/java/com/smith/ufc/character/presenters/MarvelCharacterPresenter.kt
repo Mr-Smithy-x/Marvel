@@ -1,14 +1,13 @@
-package com.smith.ufc.character
+package com.smith.ufc.character.presenters
 
 import com.smith.ufc.Marvel
+import com.smith.ufc.character.CharacterContract
 import com.smith.ufc.data.base.BaseContract
 import com.smith.ufc.data.models.verbose.MarvelCharacterList
 import com.smith.ufc.data.models.MarvelData
-import com.smith.ufc.data.di.MarvelModule
-import com.smith.ufc.data.service.MarvelDataSource
+import com.smith.ufc.data.repositories.character.CharacterRepository
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
-import javax.inject.Named
 
 /**
  * Created by Charlton on 10/25/17.

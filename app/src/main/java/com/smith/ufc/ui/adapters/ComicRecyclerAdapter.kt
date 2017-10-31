@@ -10,14 +10,14 @@ import com.bumptech.glide.Glide
 import com.smith.ufc.R
 import com.smith.ufc.comic.ComicActivity
 import com.smith.ufc.data.models.MarvelComic
-import com.smith.ufc.comic.ComicViewHolderAdapter
+import com.smith.ufc.comic.presenters.ComicRecyclerPresenter
 
 
 /**
  * Created by Charlton on 10/26/17.
  */
 
-class ComicRecyclerAdapter(val repository: ComicViewHolderAdapter) : RecyclerView.Adapter<ComicRecyclerAdapter.ComicViewHolder>() {
+class ComicRecyclerAdapter(val repository: ComicRecyclerPresenter) : RecyclerView.Adapter<ComicRecyclerAdapter.ComicViewHolder>() {
 
     init {
         setHasStableIds(true)
@@ -40,7 +40,7 @@ class ComicRecyclerAdapter(val repository: ComicViewHolderAdapter) : RecyclerVie
      * Created by Charlton on 10/26/17.
      */
 
-    inner class ComicViewHolder(view: View) : RecyclerView.ViewHolder(view), ComicViewHolderAdapter.ComicViewHolder {
+    inner class ComicViewHolder(view: View) : RecyclerView.ViewHolder(view), ComicRecyclerPresenter.ComicViewHolder {
 
         private val title: AppCompatTextView = view.findViewById(R.id.comic_title)
         private val image: AppCompatImageView = view.findViewById(R.id.comic_image)

@@ -9,11 +9,12 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.smith.ufc.R
 import com.smith.ufc.comic.ComicContract
-import com.smith.ufc.comic.ComicViewHolderAdapter
-import com.smith.ufc.comic.MarvelComicPresenter
+import com.smith.ufc.comic.presenters.ComicRecyclerPresenter
+import com.smith.ufc.comic.presenters.MarvelComicPresenter
 import com.smith.ufc.data.base.BaseActivity
 import com.smith.ufc.data.models.MarvelCharacter
 import com.smith.ufc.data.models.verbose.MarvelComicList
+import com.smith.ufc.data.repositories.character.CharacterSpecification
 import com.smith.ufc.ui.adapters.ComicRecyclerAdapter
 import com.smith.ufc.ui.views.GridRecyclerView
 import com.willowtreeapps.spruce.Spruce
@@ -21,11 +22,17 @@ import com.willowtreeapps.spruce.animation.DefaultAnimations
 import com.willowtreeapps.spruce.sort.DefaultSort
 import timber.log.Timber
 
+/**
+ * @see com.smith.ufc.comic.presenters.MarvelComicPresenter
+ * @see com.smith.ufc.ui.adapters.ComicRecyclerAdapter
+ * @see com.smith.ufc.comic.presenters.ComicRecyclerPresenter
+ * @see com.smith.ufc.comic.ComicContract
+ */
 class CharacterActivity : BaseActivity(), ComicContract.View {
 
 
     private val mMarvelComicPresenter: ComicContract.Presenter? = MarvelComicPresenter(this)
-    private var mComicRecyclerAdapter: ComicRecyclerAdapter? = ComicRecyclerAdapter(ComicViewHolderAdapter())
+    private var mComicRecyclerAdapter: ComicRecyclerAdapter? = ComicRecyclerAdapter(ComicRecyclerPresenter())
     private var spruceAnimator: Animator? = null
 
 

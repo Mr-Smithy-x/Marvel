@@ -1,4 +1,4 @@
-package com.smith.ufc.comic
+package com.smith.ufc.data.repositories.comic
 
 import com.smith.ufc.data.base.RealmSpecification
 import com.smith.ufc.data.models.MarvelComic

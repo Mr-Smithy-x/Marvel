@@ -1,15 +1,14 @@
-package com.smith.ufc.comic
+package com.smith.ufc.character.presenters
 
-import com.smith.ufc.data.base.BaseAdapter
+import com.smith.ufc.data.base.BaseAdapterPresenter
 import com.smith.ufc.data.models.MarvelCharacter
-import com.smith.ufc.data.models.MarvelComic
 import java8.util.stream.Collectors
 import java8.util.stream.StreamSupport
 
 /**
  * Created by Charlton on 10/31/17.
  */
-class CharacterViewHolderAdapter : BaseAdapter<CharacterViewHolderAdapter.CharacterView, MarvelCharacter>() {
+class CharacterRecyclerPresenter : BaseAdapterPresenter<CharacterRecyclerPresenter.CharacterView, MarvelCharacter>() {
 
     override fun getItemId(): MutableList<Int> = StreamSupport.stream(super.getItems()).map { r -> r.id  }.collect(Collectors.toList())
 
@@ -20,7 +19,7 @@ class CharacterViewHolderAdapter : BaseAdapter<CharacterViewHolderAdapter.Charac
     }
 
 
-    interface CharacterView : BaseAdapter.BaseView {
+    interface CharacterView : BaseAdapterPresenter.BaseView {
 
         fun setTitle(title: String)
 

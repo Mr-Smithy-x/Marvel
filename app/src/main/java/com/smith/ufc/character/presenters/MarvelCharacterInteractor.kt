@@ -1,9 +1,10 @@
-package com.smith.ufc.character
+package com.smith.ufc.character.presenters
 
+import com.smith.ufc.character.CharacterContract
 import com.smith.ufc.data.base.BaseContract
 import com.smith.ufc.data.models.verbose.MarvelCharacterList
+import com.smith.ufc.data.repositories.character.CharacterRepository
 import com.smith.ufc.data.service.MarvelCharacterDataSource
-import com.smith.ufc.data.service.MarvelDataSource
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
 

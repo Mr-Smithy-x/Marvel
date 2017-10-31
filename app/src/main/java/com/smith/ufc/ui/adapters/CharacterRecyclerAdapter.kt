@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.smith.ufc.R
 import com.smith.ufc.character.CharacterActivity
-import com.smith.ufc.comic.CharacterViewHolderAdapter
-import com.smith.ufc.comic.ComicActivity
+import com.smith.ufc.character.presenters.CharacterRecyclerPresenter
 import com.smith.ufc.data.models.MarvelCharacter
 
 
@@ -18,7 +17,7 @@ import com.smith.ufc.data.models.MarvelCharacter
  * Created by Charlton on 10/26/17.
  */
 
-class CharacterRecyclerAdapter(val repository: CharacterViewHolderAdapter) : RecyclerView.Adapter<CharacterRecyclerAdapter.CharacterViewHolder>() {
+class CharacterRecyclerAdapter(val repository: CharacterRecyclerPresenter) : RecyclerView.Adapter<CharacterRecyclerAdapter.CharacterViewHolder>() {
 
     init {
         setHasStableIds(true)
@@ -42,7 +41,7 @@ class CharacterRecyclerAdapter(val repository: CharacterViewHolderAdapter) : Rec
      * Created by Charlton on 10/26/17.
      */
 
-    inner class CharacterViewHolder(view: View) : RecyclerView.ViewHolder(view), CharacterViewHolderAdapter.CharacterView {
+    inner class CharacterViewHolder(view: View) : RecyclerView.ViewHolder(view), CharacterRecyclerPresenter.CharacterView {
 
         private val title: AppCompatTextView = view.findViewById(R.id.character_name)
         private val image: AppCompatImageView = view.findViewById(R.id.character_image)

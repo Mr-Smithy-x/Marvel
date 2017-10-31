@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
 import com.smith.ufc.Marvel
-import com.smith.ufc.character.CharacterRepository
-import com.smith.ufc.comic.ComicRepository
+import com.smith.ufc.data.repositories.character.CharacterRepository
+import com.smith.ufc.data.repositories.comic.ComicRepository
 import com.smith.ufc.data.di.MarvelModule
 import com.smith.ufc.data.service.MarvelDataSource
 

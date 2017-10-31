@@ -1,9 +1,11 @@
-package com.smith.ufc.comic
+package com.smith.ufc.comic.presenters
 
 import com.smith.ufc.Marvel
+import com.smith.ufc.comic.ComicContract
 import com.smith.ufc.data.base.BaseContract
 import com.smith.ufc.data.models.verbose.MarvelComicList
 import com.smith.ufc.data.models.MarvelData
+import com.smith.ufc.data.repositories.comic.ComicRepository
 
 import javax.inject.Inject
 

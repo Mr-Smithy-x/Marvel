@@ -1,15 +1,9 @@
 package com.smith.ufc;
 
-import com.smith.ufc.character.CharacterContract;
-import com.smith.ufc.character.CharacterGenericAdapter;
-import com.smith.ufc.character.CharacterRepository;
-import com.smith.ufc.character.MarvelCharacterPresenter;
-import com.smith.ufc.comic.ComicRepository;
-import com.smith.ufc.comic.ComicRepositoryImpl;
+import com.smith.ufc.character.presenters.CharacterViewPagerPresenter;
 import com.smith.ufc.data.models.MarvelCharacter;
 import com.smith.ufc.data.models.MarvelData;
 import com.smith.ufc.data.models.MarvelResponse;
-import com.smith.ufc.data.models.verbose.MarvelCharacterList;
 import com.smith.ufc.data.models.verbose.MarvelComicList;
 import com.smith.ufc.data.models.verbose.Thumbnail;
 
@@ -22,13 +16,8 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 
-import io.reactivex.Observable;
-import io.realm.Realm;
-
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by Charlton on 10/31/17.
@@ -38,9 +27,9 @@ public class ComicRepositoryTest {
 
 
     @Mock
-    private CharacterGenericAdapter.CharacterGenericView view;
+    private CharacterViewPagerPresenter.CharacterGenericView view;
 
-    private CharacterGenericAdapter adapter;
+    private CharacterViewPagerPresenter adapter;
 
 
     @Before
@@ -55,7 +44,7 @@ public class ComicRepositoryTest {
 
     @Test
     public void checkViewCallBack() {
-        adapter = new CharacterGenericAdapter();
+        adapter = new CharacterViewPagerPresenter();
         MarvelCharacter marvelCharacter = new MarvelCharacter();
         marvelCharacter.setName(TITLE);
         Thumbnail thumbnail = new Thumbnail();
@@ -76,7 +65,7 @@ public class ComicRepositoryTest {
 
     @Test
     public void failIfListIsEmpty() {
-        adapter = new CharacterGenericAdapter();
+        adapter = new CharacterViewPagerPresenter();
         MarvelResponse<MarvelData<MarvelComicList>> marvelDataMarvelResponse = new MarvelResponse<>(200);
         marvelDataMarvelResponse.data = new MarvelData<>(new MarvelComicList());
         adapter.onBindRepositoryRowViewAtPosition(0,view);
@@ -95,7 +84,7 @@ public class ComicRepositoryTest {
 
     @Test
     public void failIfDataNull() {
-        adapter = new CharacterGenericAdapter();
+        adapter = new CharacterViewPagerPresenter();
         MarvelResponse<MarvelData<MarvelComicList>> marvelDataMarvelResponse = new MarvelResponse<>(200);
         marvelDataMarvelResponse.data = new MarvelData<>(new MarvelComicList());
         adapter.setData(Arrays.asList(new MarvelCharacter()));

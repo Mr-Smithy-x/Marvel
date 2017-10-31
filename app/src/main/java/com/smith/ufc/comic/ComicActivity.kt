@@ -9,20 +9,28 @@ import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.smith.ufc.R
 import com.smith.ufc.character.CharacterContract
-import com.smith.ufc.character.MarvelCharacterPresenter
+import com.smith.ufc.character.presenters.MarvelCharacterPresenter
+import com.smith.ufc.character.presenters.CharacterRecyclerPresenter
 import com.smith.ufc.data.base.BaseActivity
 import com.smith.ufc.data.models.MarvelComic
 import com.smith.ufc.data.models.verbose.MarvelCharacterList
+import com.smith.ufc.data.repositories.comic.ComicSpecification
 import com.smith.ufc.ui.adapters.CharacterRecyclerAdapter
 import com.smith.ufc.ui.views.GridRecyclerView
 import java.util.*
 
 
+/**
+ * @see com.smith.ufc.character.presenters.MarvelCharacterPresenter
+ * @see com.smith.ufc.ui.adapters.CharacterRecyclerAdapter
+ * @see com.smith.ufc.character.presenters.CharacterRecyclerPresenter
+ * @see com.smith.ufc.character.CharacterContract
+ */
 class ComicActivity : BaseActivity(), CharacterContract.View {
 
 
     private val mMarvelCharacterPresenter: CharacterContract.Presenter? = MarvelCharacterPresenter(this)
-    private val mCharacterAdapter: CharacterRecyclerAdapter? = CharacterRecyclerAdapter(CharacterViewHolderAdapter())
+    private val mCharacterAdapter: CharacterRecyclerAdapter? = CharacterRecyclerAdapter(CharacterRecyclerPresenter())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

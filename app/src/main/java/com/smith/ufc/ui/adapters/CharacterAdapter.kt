@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.smith.ufc.R
 import com.smith.ufc.data.models.MarvelCharacter
-import com.smith.ufc.character.CharacterGenericAdapter
+import com.smith.ufc.character.presenters.CharacterViewPagerPresenter
 import com.smith.ufc.character.CharacterActivity
 import com.willowtreeapps.spruce.Spruce
 import com.willowtreeapps.spruce.animation.DefaultAnimations
@@ -21,7 +21,7 @@ import java.util.*
  * Created by Charlton on 10/27/17.
  */
 
-class CharacterAdapter(val repository: CharacterGenericAdapter) : PagerAdapter() {
+class CharacterAdapter(val repository: CharacterViewPagerPresenter) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val inflate = LayoutInflater.from(container.context).inflate(R.layout.holder_image_view, container, false)
@@ -56,7 +56,7 @@ class CharacterAdapter(val repository: CharacterGenericAdapter) : PagerAdapter()
      * Created by Charlton on 10/26/17.
      */
 
-    class SeriesViewHolder internal constructor(id:Int, itemView: View) : CharacterGenericAdapter.CharacterGenericView {
+    class SeriesViewHolder internal constructor(id:Int, itemView: View) : CharacterViewPagerPresenter.CharacterGenericView {
 
         private var title: AppCompatTextView = itemView.findViewById(R.id.character_title)
         private var description: AppCompatTextView = itemView.findViewById(R.id.character_desc)

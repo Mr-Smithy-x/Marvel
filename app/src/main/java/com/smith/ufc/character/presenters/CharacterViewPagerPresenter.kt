@@ -1,7 +1,7 @@
-package com.smith.ufc.character
+package com.smith.ufc.character.presenters
 
 import com.smith.ufc.data.models.MarvelCharacter
-import com.smith.ufc.data.base.BaseAdapter
+import com.smith.ufc.data.base.BaseAdapterPresenter
 import java8.util.stream.Collectors
 import java8.util.stream.StreamSupport
 
@@ -9,7 +9,7 @@ import java8.util.stream.StreamSupport
  * Created by Charlton on 10/27/17.
  */
 
-class CharacterGenericAdapter : BaseAdapter<CharacterGenericAdapter.CharacterGenericView, MarvelCharacter>() {
+class CharacterViewPagerPresenter : BaseAdapterPresenter<CharacterViewPagerPresenter.CharacterGenericView, MarvelCharacter>() {
 
     override fun getItemId(): MutableList<Int> = StreamSupport.stream(super.getItems()).map { r -> r.id  }.collect(Collectors.toList())
 
@@ -22,7 +22,7 @@ class CharacterGenericAdapter : BaseAdapter<CharacterGenericAdapter.CharacterGen
         view.setImage(character.thumbnail.toString())
     }
 
-    interface CharacterGenericView : BaseAdapter.BaseView {
+    interface CharacterGenericView : BaseAdapterPresenter.BaseView {
 
         fun setTitle(title: String)
 
