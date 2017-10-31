@@ -17,7 +17,6 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-        vectorDrawables.useSupportLibrary = true
         buildConfigField "String", "PRIV_KEY", "\"44c5ec76510e3056b157410ea94f6eb0c8d85745\""
         buildConfigField "String", "PUB_KEY", "\"007bfcf3d005159743adcee2e45dbebc\""
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
