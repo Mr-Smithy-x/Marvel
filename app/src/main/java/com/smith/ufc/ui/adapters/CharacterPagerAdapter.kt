@@ -21,11 +21,11 @@ import java.util.*
  * Created by Charlton on 10/27/17.
  */
 
-class CharacterAdapter(val repository: CharacterViewPagerPresenter) : PagerAdapter() {
+class CharacterPagerAdapter(val repository: CharacterViewPagerPresenter) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val inflate = LayoutInflater.from(container.context).inflate(R.layout.holder_image_view, container, false)
-        repository.onBindRepositoryRowViewAtPosition(position, SeriesViewHolder(repository.getItem(position).id, inflate))
+        repository.onBindRepositoryRowViewAtPosition(position, CharacterViewHolder(repository.getItem(position).id, inflate))
         Spruce.SpruceBuilder(inflate as ViewGroup?).sortWith(DefaultSort(100L)).animateWith(DefaultAnimations.growAnimator(inflate,400)).start()
         container.addView(inflate)
         return inflate
@@ -56,7 +56,7 @@ class CharacterAdapter(val repository: CharacterViewPagerPresenter) : PagerAdapt
      * Created by Charlton on 10/26/17.
      */
 
-    class SeriesViewHolder internal constructor(id:Int, itemView: View) : CharacterViewPagerPresenter.CharacterGenericView {
+    class CharacterViewHolder internal constructor(id:Int, itemView: View) : CharacterViewPagerPresenter.CharacterGenericView {
 
         private var title: AppCompatTextView = itemView.findViewById(R.id.character_title)
         private var description: AppCompatTextView = itemView.findViewById(R.id.character_desc)
@@ -64,11 +64,7 @@ class CharacterAdapter(val repository: CharacterViewPagerPresenter) : PagerAdapt
         private var button: AppCompatButton = itemView.findViewById(R.id.character_read_more_btn)
 
         init {
-            button.setOnClickListener { v ->
-                run {
-                    v.context.startActivity(CharacterActivity.newInstance(v.context, id))
-                }
-            }
+            button.setOnClickListener { v -> v.context.startActivity(CharacterActivity.newInstance(v.context, id)) }
         }
 
         override fun setTitle(title: String) {

@@ -33,7 +33,7 @@ import com.smith.ufc.data.repositories.character.CharacterSpecification
 import com.smith.ufc.data.repositories.comic.ComicSpecification
 import com.smith.ufc.helpers.DrawableTextWatcher
 import com.smith.ufc.helpers.RightDrawableClickListener
-import com.smith.ufc.ui.adapters.CharacterAdapter
+import com.smith.ufc.ui.adapters.CharacterPagerAdapter
 import com.smith.ufc.ui.adapters.ComicRecyclerAdapter
 import com.smith.ufc.ui.manager.AnimatedGridLayoutManager
 import com.smith.ufc.ui.views.ArrowViewPager
@@ -64,7 +64,7 @@ class MainActivity : BaseActivity(), ComicContract.View, View.OnClickListener {
     private val mMarvelComicPresenter: ComicContract.Presenter = MarvelComicPresenter(this)
     private val mMarvelCharacterPresenter: CharacterContract.Presenter = MarvelCharacterPresenter(object : CharacterContract.View {
         override fun onFetchDataSuccess(model: MarvelCharacterList) {
-            mCharacterAdapter?.setData(model)
+            mCharacterPagerAdapter?.setData(model)
         }
 
         override fun onFetchDataStarted() {
@@ -84,7 +84,7 @@ class MainActivity : BaseActivity(), ComicContract.View, View.OnClickListener {
     //endregion
 
     private var mComicAdapter: ComicRecyclerAdapter? = ComicRecyclerAdapter(ComicRecyclerPresenter())
-    private var mCharacterAdapter: CharacterAdapter? = CharacterAdapter(CharacterViewPagerPresenter())
+    private var mCharacterPagerAdapter: CharacterPagerAdapter? = CharacterPagerAdapter(CharacterViewPagerPresenter())
     private var animatedGridLayoutManager: AnimatedGridLayoutManager? = null
 
     @SuppressLint("ClickableViewAccessibility")
@@ -111,7 +111,7 @@ class MainActivity : BaseActivity(), ComicContract.View, View.OnClickListener {
         }
         animatedGridLayoutManager = findViewById<GridRecyclerView>(R.id.recycler_view).layoutManager as AnimatedGridLayoutManager
         animatedGridLayoutManager!!.setRecycler(findViewById<GridRecyclerView>(R.id.recycler_view))
-        findViewById<ArrowViewPager>(R.id.arrow_view_pager).getViewPager().adapter = mCharacterAdapter
+        findViewById<ArrowViewPager>(R.id.arrow_view_pager).getViewPager().adapter = mCharacterPagerAdapter
         findViewById<RecyclerView>(R.id.recycler_view).adapter = mComicAdapter
         findViewById<NavigationView>(R.id.navigation_view).setNavigationItemSelectedListener {
             findViewById<DrawerLayout>(R.id.drawer_layout).closeDrawer(GravityCompat.START)
@@ -127,7 +127,7 @@ class MainActivity : BaseActivity(), ComicContract.View, View.OnClickListener {
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        outState?.putIntArray(KEY_CHARACTERS, mCharacterAdapter?.repository?.getItemId()?.toIntArray())
+        outState?.putIntArray(KEY_CHARACTERS, mCharacterPagerAdapter?.repository?.getItemId()?.toIntArray())
         outState?.putIntArray(KEY_COMICS, mComicAdapter?.repository?.getItemId()?.toIntArray())
         outState?.putInt(KEY_COMIC_POSITION, animatedGridLayoutManager?.findFirstVisibleItemPosition()!!)
         outState?.putInt(KEY_CHARACTER_POSITION, findViewById<ArrowViewPager>(R.id.arrow_view_pager)?.getViewPager()?.currentItem!!)
@@ -136,7 +136,7 @@ class MainActivity : BaseActivity(), ComicContract.View, View.OnClickListener {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         StreamSupport.stream(savedInstanceState?.keySet()).forEach { r -> Timber.e("Available Keys: onRestoreInstance: %s", r.toString()) }
-        mCharacterAdapter?.setData(StreamSupport.stream(savedInstanceState?.getIntArray(KEY_CHARACTERS)?.asList()).map { r -> Realm.getDefaultInstance().where(MarvelCharacter::class.java).equalTo("id", r).findFirst() }.filter(Objects::nonNull).collect(Collectors.toList()) as ArrayList<MarvelCharacter?>)
+        mCharacterPagerAdapter?.setData(StreamSupport.stream(savedInstanceState?.getIntArray(KEY_CHARACTERS)?.asList()).map { r -> Realm.getDefaultInstance().where(MarvelCharacter::class.java).equalTo("id", r).findFirst() }.filter(Objects::nonNull).collect(Collectors.toList()) as ArrayList<MarvelCharacter?>)
         mComicAdapter?.setData(StreamSupport.stream(savedInstanceState?.getIntArray(KEY_COMICS)?.asList()).map { r -> Realm.getDefaultInstance().where(MarvelComic::class.java).equalTo("id", r).findFirst() }.filter(Objects::nonNull).collect(Collectors.toList()))
         try {
             findViewById<GridRecyclerView>(R.id.recycler_view).smoothScrollToPosition(savedInstanceState?.getInt(KEY_COMIC_POSITION, 0)!!)
@@ -177,7 +177,7 @@ class MainActivity : BaseActivity(), ComicContract.View, View.OnClickListener {
             R.id.search_bar -> {
                 (v as EditText).setText("")
                 mComicAdapter?.setData(comicDb.query(ComicSpecification()))
-                mCharacterAdapter?.setData(characterDb.query(CharacterSpecification()))
+                mCharacterPagerAdapter?.setData(characterDb.query(CharacterSpecification()))
             }
         }
     }
