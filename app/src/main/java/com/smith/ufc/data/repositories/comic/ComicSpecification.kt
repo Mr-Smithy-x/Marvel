@@ -1,6 +1,6 @@
 package com.smith.ufc.data.repositories.comic
 
-import com.smith.ufc.data.base.RealmSpecification
+import com.smith.ufc.data.repositories.RealmSpecification
 import com.smith.ufc.data.models.MarvelComic
 import io.realm.Case
 import io.realm.Realm

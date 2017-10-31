@@ -4,7 +4,7 @@ package com.smith.ufc.data.base
  * Created by Charlton on 10/31/17.
  */
 
-interface Repository<T, S> {
+interface BaseRepository<T, S> {
     fun add(item: T)
 
     fun add(items: List<T>)
